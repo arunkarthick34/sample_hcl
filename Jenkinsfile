@@ -1,8 +1,9 @@
 node('slave'){
-	try {
+	
    stage('SCM Checkout'){
      git 'https://github.com/arunkarthick34/sample_hcl.git'
    }
+		/*
    stage('Compile-Package'){
 	   try{
 	   sh "mvn clean package"
@@ -44,28 +45,9 @@ node('slave'){
    }
 }
 	
-	}
 	
-       catch(error){
-		echo "build failed"
-	}
 	
-	finally {
-        def currentResult = currentBuild.result ?: 'SUCCESS'
-        if (currentResult == 'UNSTABLE') {
-            echo 'This will run only if the run was marked as unstable'
-        }
-		else{
-		echo 'This project build successfully'	
-		}
-
-
-        def previousResult = currentBuild.getPreviousBuild()?.result
-        if (previousResult != null && previousResult != currentResult) {
-            echo 'This will run only if the state of the Pipeline has changed'
-            echo 'For example, if the Pipeline was previously failing but is now successful'
-        }
-	}
+    
 }
 
 
